@@ -113,8 +113,8 @@ class Camera:
         obj.rect.y += self.dy
 
     def update(self, target):
-        self.dx = width // 2 - (target.rect.x + target.rect.w // 2) + sx
-        self.dy = height // 2 - (target.rect.y + target.rect.h // 2) + sy
+        self.dx = width // 2 - (target.rect.x + target.rect.w // 2)
+        self.dy = height // 2 - (target.rect.y + target.rect.h // 2)
 
 
 start_screen()
@@ -141,8 +141,16 @@ while running:
                 sx = -1
             run = True
         elif event.type == pygame.KEYUP:
-            sx = sy = 0
-            run = False
+            if event.key == pygame.K_DOWN:
+                sy = 0
+            if event.key == pygame.K_UP:
+                sy = 0
+            if event.key == pygame.K_RIGHT:
+                sx = 0
+            if event.key == pygame.K_LEFT:
+                sx = 0
+            if sy and sx == 0:
+                run = False
     if run:
         player.update(sx, sy)
     tiles_group.draw(screen)
